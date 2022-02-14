@@ -24,8 +24,7 @@ connection.disconnect()
 
 print(output)
 
-with open('mapacalor.txt', 'w') as arquivo:
-    output = output.split('\n')
+with open('mapacalor.csv', 'w') as arquivo:
     for valor in output:
         if re.search('^([0-9A-Fa-f]{4}[:-])', str(valor)[:6]) is None:
             pass
