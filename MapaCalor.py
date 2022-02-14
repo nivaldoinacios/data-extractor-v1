@@ -23,6 +23,9 @@ connection.disconnect()
 
 print(output)
 
-with open('mapacalor.txt', 'w') as arquivo:
+#with open('mapacalor.txt', 'w') as arquivo:
+#    for valor in output:
+#        arquivo.write(str(valor))
+with open('mapacalor.csv', 'w') as arquivo:
     for valor in output:
         arquivo.write(str(valor))
