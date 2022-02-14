@@ -1,6 +1,7 @@
 import netmiko
 from netmiko import ConnectHandler
 import time
+import re
 
 switch_1 = {
     'device_type':'huawei',
@@ -24,5 +25,9 @@ connection.disconnect()
 print(output)
 
 with open('mapacalor.txt', 'w') as arquivo:
+    output = output.split('\n')
     for valor in output:
-        arquivo.write(str(valor))
+        if re.search('^([0-9A-Fa-f]{4}[:-])', str(valor)[:6]) is None:
+            pass
+        else:
+            arquivo.write(str(valor)+'\n')
