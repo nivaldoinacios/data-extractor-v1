@@ -1,6 +1,34 @@
-import pandas as pd
-import MapaCalor.py
-df_output = pd.DataFrame
-df_output = {'STA_MAC':'a483-e73f-ec23', 'AP_ID':'3', 'Ap_name':'AP_CWB_MEIO', 'Rf/WLAN':'1/1', 'Band':'5G', 'Type':'11ac', 'RSSI':'-48', 'VLAN':'13', 'IP_address':'172.16.13.60', 'SSID':'eterea'}
+import netmiko
+from netmiko import ConnectHandler
+import time
+import re
 
-df = df_output(output)
+switch_1 = {
+    'device_type':'huawei',
+    'host':'172.17.1.150',
+    'username':'netmiko',
+    'password': '#Roost2021!',
+    'global_delay_factor':0.1,
+}
+start = time.time()
+
+connection = ConnectHandler(**switch_1)
+connection.enable()
+command = 'display access-user'
+
+outputA= connection.send_command(command)
+outputB = str(outputA)
+output = outputA
+
+connection.disconnect()
+
+print(output)
+
+with open('mapacalor.txt', 'w') as arquivo:
+    output = output.split('\n')
+
+    for valor in output:
+#        if re.search('^([0-9A-Fa-f]{4}[:-])', str(valor)[:6]) is None:
+#            pass
+#        else:
+            arquivo.write(str(valor)+'\n')
