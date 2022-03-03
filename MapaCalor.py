@@ -4,11 +4,11 @@ import time
 import re
 
 switch_1 = {
-    'device_type':'huawei',
-    'host':'172.17.1.150',
-    'username':'netmiko',
+    'device_type': 'huawei',
+    'host': '172.17.1.150',
+    'username': 'netmiko',
     'password': '#Roost2021!',
-    'global_delay_factor':0.1,
+    'global_delay_factor': 0.1,
 }
 start = time.time()
 
@@ -16,7 +16,7 @@ connection = ConnectHandler(**switch_1)
 connection.enable()
 command = 'display station all'
 
-outputA= connection.send_command(command)
+outputA = connection.send_command(command)
 outputB = str(outputA)
 output = outputA
 

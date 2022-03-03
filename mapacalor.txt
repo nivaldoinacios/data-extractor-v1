@@ -2,11 +2,12 @@
  ------------------------------------------------------------------------------------------------------
  UserID  Username               IP address                               MAC            Status
  ------------------------------------------------------------------------------------------------------
+ 3       netmiko                10.81.234.12                             -              Success         
  8       netmiko                10.81.234.12                             -              Success         
- 12      netmiko                10.81.234.12                             -              Success         
  4665    Simone                 172.16.13.50                             52f9-d34f-ce1a Success         
  4688    joao.feitosa           172.16.13.64                             103f-4474-deac Success         
  4690    5A-E8-87-99-90-52      172.16.250.143                           5ae8-8799-9052 Success         
+ 4738    jo...o.feitosa         172.16.13.66                             7ce9-d3d6-5b31 Success         
  4739    andre                  172.19.13.53                             0e46-2139-e445 Success         
  4742    6256e3cae308           172.16.250.121                           6256-e3ca-e308 Pre-authen      
  4777    maycon.brasil          172.16.13.68                             0a37-d4a0-4c9a Success         
@@ -17,20 +18,19 @@
  4846    REDISUL\ivandro.mar... 172.16.13.63                             5cea-1dd8-4227 Success         
  4857    michelle.mileki        172.16.13.62                             7c8b-b531-3c4f Success         
  4871    fabiano.pamplona       172.17.13.20                             eab6-0b68-0ff1 Success         
- 4879    bc6ad1fbb822           10.10.17.192                             bc6a-d1fb-b822 Pre-authen      
+ 4874    jean.tiburski@redis... 172.16.13.55                             6616-2ec5-1f96 Success         
+ 4879    BC-6A-D1-FB-B8-22      10.10.17.192                             bc6a-d1fb-b822 Success         
  4880    stephany.rios          172.19.13.55                             60ab-67c4-61d0 Success         
  4890    michelle.mileki        172.16.13.58                             50eb-71c2-1a9b Success         
  4894    marina.oliveira        172.16.13.65                             aadd-27d7-b79c Success         
  4896    gabriel.rocha          172.16.13.53                             5ccd-5bf3-c5a0 Success         
  4903    REDISUL\marcos.juni... 172.19.13.60                             8056-f2f0-9d73 Success         
- 4906    edelber.gajardone      172.17.13.23                             5ccd-5b0b-f67b Success         
  4948    luiz.rocha             172.17.13.25                             5ccd-5bf3-c483 Success         
  4951    stephany.rios          172.19.13.57                             00d7-6d3b-dc6f Success         
  4958    marcos.junior          172.19.13.58                             2a87-d116-a3b9 Success         
  4960    7C-F3-1B-A0-E9-29      10.10.17.174                             7cf3-1ba0-e929 Success         
  4964    fabiano.pamplona       172.17.13.21                             00d7-6d3b-e1b5 Success         
  4965    REDISUL\guilherme.c... 172.19.13.56                             5ccd-5bf3-c1bd Success         
- 4990    jo...o.feitosa         172.16.13.66                             7ce9-d3d6-5b31 Success         
- 5021    jean.tiburski@redis... 172.16.13.55                             6616-2ec5-1f96 Success         
+ 5044    guilherme.carvalho     172.19.13.64                             6af2-fc50-6d59 Success         
  ------------------------------------------------------------------------------------------------------
  Total: 30, printed: 30
