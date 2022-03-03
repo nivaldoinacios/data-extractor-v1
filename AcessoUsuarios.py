@@ -32,3 +32,4 @@ with open('usuarios.csv', 'w') as arquivo:
             pass
         else:
             arquivo.write(str(valor)+'\n')
+            #FATIAMENTO STRING USER
