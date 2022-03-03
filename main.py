@@ -28,7 +28,7 @@ with open('usuarios.csv', 'w') as arquivo:
     output = output.split('\n')
 
     for valor in output:
-        if re.search('[^\s]([\d]{1,4})', str(valor)) is None:
+        if re.search('^\s([\d]{1,4})', str(valor)) is None:
             pass
         else:
             arquivo.write(str(valor)+'\n')
