@@ -2,6 +2,11 @@ import netmiko
 from netmiko import ConnectHandler
 import time
 import re
+from datetime import datetime
+
+timestamp_data = datetime.now()
+timestamp = timestamp_data.strftime('%d,%m,%Y %H:%M')
+
 
 switch_1 = {
     'device_type': 'huawei',
@@ -31,4 +36,4 @@ with open('mapacalor.csv', 'w') as arquivo:
         if re.search('^([0-9A-Fa-f]{4}[:-])', str(valor)[:6]) is None:
             pass
         else:
-            arquivo.write(str(valor)+'\n')
+            arquivo.write(str(valor) + ' ' + timestamp + '\n')

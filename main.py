@@ -1,9 +1,38 @@
-#import MapaCalor
-#import AcessoUsuarios
-import pandas as pd
+import netmiko
+from netmiko import ConnectHandler
+import time
+import re
+from datetime import datetime
 
-df_mapacalor = pd.read_csv("mapacalor.csv", delim_whitespace=True)
-df_acessousuarios = pd.read_csv("usuarios.csv", delim_whitespace=True)
+timestamp_data = datetime.now()
+timestamp = timestamp_data.strftime('%d,%m,%Y %H:%M')
 
+switch_1 = {
+    'device_type': 'huawei',
+    'host': '172.17.1.150',
+    'username': 'netmiko',
+    'password': '#Roost2021!',
+    'global_delay_factor': 0.1,
+}
+start = time.time()
 
+connection = ConnectHandler(**switch_1)
+connection.enable()
+command = 'display station all'
 
+outputA = connection.send_command(command)
+outputB = str(outputA)
+output = outputA
+
+connection.disconnect()
+
+print(output)
+
+with open('mapacalor.csv', 'w') as arquivo:
+    output = output.split('\n')
+
+    for valor in output:
+        if re.search('^([0-9A-Fa-f]{4}[:-])', str(valor)[:6]) is None:
+            pass
+        else:
+            arquivo.write(str(valor) + ' ' + timestamp + '\n')
