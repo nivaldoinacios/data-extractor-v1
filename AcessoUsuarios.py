@@ -5,7 +5,7 @@ import re
 from datetime import datetime
 
 timestamp_data = datetime.now()
-timestamp = timestamp_data.strftime('%d,%m,%Y %H:%M')
+timestamp = timestamp_data.strftime('%d/%m/%Y %H:%M')
 
 
 switch_1 = {
