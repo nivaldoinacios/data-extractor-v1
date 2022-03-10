@@ -1,20 +1,31 @@
+# Carrega pacotes netmiko.
 import netmiko
 from netmiko import ConnectHandler
-import time
-import re
-from datetime import datetime
 
-timestamp_data = datetime.now()
-timestamp = timestamp_data.strftime('%d/%m/%Y %H:%M')
+# Carrega funcoes de tempo; data e hora.
+from datetime import datetime
+import time
+
+# Carrega, respectivamente, pacotes para expressoes regex e funcoes do sistema operacional.
+import re
+import os
+# Carrega o pacote que permite usarmos '.env' em python.
+from dotenv import load_dotenv
+
+load_dotenv()
+
+timestamp = datetime.now()
+timestamp = timestamp.strftime('%d/%m/%Y %H:%M')
 
 
 switch_1 = {
     'device_type': 'huawei',
     'host': '172.17.1.150',
-    'username': 'netmiko',
-    'password': '#Roost2021!',
+    'username': os.getenv('USUARIO'),
+    'password': os.getenv('PASSWORD'),
     'global_delay_factor': 0.1,
 }
+
 start = time.time()
 
 connection = ConnectHandler(**switch_1)
@@ -29,7 +40,7 @@ connection.disconnect()
 
 print(output)
 
-with open('mapacalor.csv', 'w') as arquivo:
+with open(os.getenv('PATH_DIS_STATION'), 'w') as arquivo:
     output = output.split('\n')
 
     for valor in output:

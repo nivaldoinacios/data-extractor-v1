@@ -1,8 +1,18 @@
-import netmiko
+#
 from netmiko import ConnectHandler
-import time
-import re
+import netmiko
+
+#
 from datetime import datetime
+import time
+
+#
+import re
+import os
+#
+from dotenv import load_dotenv
+
+load_dotenv()
 
 timestamp_data = datetime.now()
 timestamp = timestamp_data.strftime('%d/%m/%Y %H:%M')
@@ -11,10 +21,11 @@ timestamp = timestamp_data.strftime('%d/%m/%Y %H:%M')
 switch_1 = {
     'device_type': 'huawei',
     'host': '172.17.1.150',
-    'username': 'netmiko',
-    'password': '#Roost2021!',
+    'username': os.getenv('USUARIO'),
+    'password': os.getenv('PASSWORD'),
     'global_delay_factor': 0.1,
 }
+
 start = time.time()
 
 connection = ConnectHandler(**switch_1)
@@ -29,7 +40,7 @@ connection.disconnect()
 
 print(output)
 
-with open('usuarios.csv', 'w') as arquivo:
+with open('PATH_DIS_ACC_USERS', 'w') as arquivo:
     output = output.split('\n')
 
     for valor in output:
@@ -37,4 +48,3 @@ with open('usuarios.csv', 'w') as arquivo:
             pass
         else:
             arquivo.write(str(valor) + ' ' + timestamp + '\n')
-            #FATIAMENTO STRING USER
