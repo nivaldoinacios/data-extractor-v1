@@ -59,4 +59,8 @@ es = Elasticsearch(
 
 es.indices.get(index='heatmap*')
 
-es.indices.get
+
+
+#%%
+
+#%%
