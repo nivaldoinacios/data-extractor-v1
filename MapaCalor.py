@@ -48,3 +48,4 @@ with open(os.getenv('PATH_DIS_STATION'), 'w') as arquivo:
             pass
         else:
             arquivo.write(str(valor) + ' ' + timestamp + '\n')
+#%%

@@ -40,7 +40,7 @@ connection.disconnect()
 
 print(output)
 
-with open('PATH_DIS_ACC_USERS', 'w') as arquivo:
+with open(os.getenv('PATH_DIS_ACC_USERS'), 'a') as arquivo:
     output = output.split('\n')
 
     for valor in output:
@@ -48,3 +48,5 @@ with open('PATH_DIS_ACC_USERS', 'w') as arquivo:
             pass
         else:
             arquivo.write(str(valor) + ' ' + timestamp + '\n')
+
+#%%

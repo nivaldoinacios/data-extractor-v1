@@ -1,4 +1,11 @@
 from elasticsearch import Elasticsearch
+import csv
+
+import eland as ed
+import pandas as pd
+
+
+from es_authentication import es
 
 # Carrega pacotes netmiko.
 import netmiko
@@ -14,53 +21,54 @@ import os
 # Carrega o pacote que permite usarmos '.env' em python.
 from dotenv import load_dotenv
 
+#%%
+
 load_dotenv()
-#
-# timestamp = datetime.now()
-# timestamp = timestamp.strftime('%d/%m/%Y %H:%M')
-#
-#
-# switch_1 = {
-#     'device_type': 'huawei',
-#     'host': '172.17.1.150',
-#     'username': os.getenv('USUARIO'),
-#     'password': os.getenv('PASSWORD'),
-#     'global_delay_factor': 0.1,
-# }
-#
-# start = time.time()
-#
-# connection = ConnectHandler(**switch_1)
-# connection.enable()
-# command = 'display station all'
-#
-# outputA = connection.send_command(command)
-# outputB = str(outputA)
-# output = outputA
-#
-# connection.disconnect()
-#
-# print(output)
-#
-# with open(os.getenv('PATH_DIS_STATION'), 'w') as arquivo:
-#     output = output.split('\n')
-#
-#     for valor in output:
-#         if re.search('^([0-9A-Fa-f]{4}[:-])', str(valor)[:6]) is None:
-#             pass
-#         else:
-#             arquivo.write(str(valor) + ' ' + timestamp + '\n')
+
+timestamp = datetime.now()
+timestamp = timestamp.strftime('%d/%m/%Y %H:%M')
 
 
-es = Elasticsearch(
-    ['http://192.168.10.14:9200'],
-    basic_auth=(os.getenv('ELK_USERNAME'),os.getenv('ELK_PASSWORD'))
-)
+switch_1 = {
+    'device_type': 'huawei',
+    'host': '172.17.1.150',
+    'username': os.getenv('USUARIO'),
+    'password': os.getenv('PASSWORD'),
+    'global_delay_factor': 0.1,
+}
 
-es.indices.get(index='heatmap*')
+start = time.time()
 
+connection = ConnectHandler(**switch_1)
+connection.enable()
+command = 'display access-user'
 
+outputA = connection.send_command(command)
+outputB = str(outputA)
+output = outputA
+
+connection.disconnect()
+
+print(output)
+
+# Escreve o valor de output em um arquivo csv se atender a busca condicional.
+
+with open(os.getenv('PATH_DIS_ACC_USERS'), 'a') as arquivo:
+    output = output.split('\n')
+
+    for valor in output:
+        if re.search('^\s([\d]{1,4})', str(valor)) is None:
+            pass
+        else:
+            arquivo.write(str(valor) + ' ' + timestamp + '\n')
 
 #%%
+
+# # Modelo de query/DataFrame com pandas a partir do index
+# res = es.search(index="heatmap*", size=100)
+# df = pd.json_normalize(res['hits']['hits'])
+# df
+
+df = pd.read_csv('', delim_whitespace=True)
 
 #%%
