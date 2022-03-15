@@ -1,16 +1,19 @@
+#Este programa consulta informações dos usuarios conectados na REDE através do Dispositivo;
+#Access Controller Huawe AC6005 V200R019C00SPC500,
+#E grava essas inforções em um arquivo .csv; nas colunas
+#["UserID", "Username", "IPADRESS", "MAC", "Status", 'DATA', 'HORA' ]
 #
+#comando de referencia: display access-user
+#
+#
+#Bibliotecas necessárias
+import time
+from datetime import datetime
+from dotenv import load_dotenv
 from netmiko import ConnectHandler
 import netmiko
-
-#
-from datetime import datetime
-import time
-
-#
 import re
 import os
-#
-from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -20,7 +23,7 @@ timestamp = timestamp_data.strftime('%d/%m/%Y %H:%M')
 
 switch_1 = {
     'device_type': 'huawei',
-    'host': '172.17.1.150',
+    'host': os.getenv('HOST'),
     'username': os.getenv('USUARIO'),
     'password': os.getenv('PASSWORD'),
     'global_delay_factor': 0.1,
@@ -40,7 +43,7 @@ connection.disconnect()
 
 print(output)
 
-with open(os.getenv('PATH_DIS_ACC_USERS'), 'w') as arquivo:
+with open('users.csv', 'w') as arquivo:
     output = output.split('\n')
 
     for valor in output:
