@@ -40,7 +40,7 @@ connection.disconnect()
 
 print(output)
 
-with open(os.getenv('PATH_DIS_ACC_USERS'), 'a') as arquivo:
+with open(os.getenv('PATH_DIS_ACC_USERS'), 'w') as arquivo:
     output = output.split('\n')
 
     for valor in output:
