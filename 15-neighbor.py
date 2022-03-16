@@ -9,6 +9,7 @@
 #Bibliotecas necessárias
 import time
 import pandas as pd
+from ListaMac import mac_list
 from datetime import datetime
 from dotenv import load_dotenv
 from netmiko import ConnectHandler
@@ -21,8 +22,6 @@ start = time.time()
 timestamp_data = datetime.now()
 timestamp = timestamp_data.strftime('%d/%m/%Y %H:%M')
 
-
-mac_list = pd.read_csv('mac_list.csv')
 mac_list = str(mac_list)
 print(mac_list.split('\n'))
 for mac in mac_list.split('\n'):
@@ -44,21 +43,19 @@ outputA = connection.send_command(command)
 outputB = str(outputA)
 output = outputA
 
-with open('neighbor.csv', 'a') as arquivo:
-
+with open('neighbor.csv', 'w') as arquivo:
     for mac in mac_list.split('\n'):
-        print(command+mac[-14::])
-        outputMac = connection.send_command(command+mac[-14::])
+        print(command + mac[-14::])
+        outputMac = connection.send_command(command + mac[-14::])
         outputMac = outputMac.split('\n')
 
         for lineInOutputMac in outputMac:
             if re.search('^([0-9A-Fa-f]{4}[:-])', str(lineInOutputMac)[:6]) is None:
                 pass
             else:
-                arquivo.write(str(lineInOutputMac)+'      '+mac[-14::]+'\n')
+                arquivo.write(' from   ' + mac[-14::] + '     ' + str(lineInOutputMac) + '\n')
 
 connection.disconnect()
 
 print(output)
-
 #%%
