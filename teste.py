@@ -41,24 +41,7 @@ type(output)
 #%%
 # # output = output.split('\n')
 # # output.split('\n')
-# # #%%
-# clean = output.replace('--', '')
-# clean = clean.replace('                             ', '             ')
-# # clean = clean.replace(' 1', '    ; 1')
-# # clean = clean.replace(' ', ';')
-# clean = clean.split('\n')
-# clean.pop()
-# clean.remove('')
-# clean
-#
-# df = pd.DataFrame(clean)
-# df
-
 #%%
-#%%
-# output = output.split('\n')
-# output.split('\n')
-# #%%
 clean = output.replace('--', '')
 clean = clean.replace('                             ', '             ')
 clean = clean.split('\n')
@@ -67,7 +50,6 @@ clean.pop()
 clean.remove('')
 clean
 
-df = pd.DataFrame(clean)
+clean = df
 df
-
 #%%
