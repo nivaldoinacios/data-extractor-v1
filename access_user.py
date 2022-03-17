@@ -40,7 +40,7 @@ outputB = str(outputA)
 output = outputA
 
 connection.disconnect()
-
+#output[303:] essa posição imprime sem o cabeçalho
 print(output)
 
 with open(os.getenv('dir_users'), 'w') as arquivo:
