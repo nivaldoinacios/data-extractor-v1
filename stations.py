@@ -1,9 +1,9 @@
 #Este programa consulta informações dos usuarios conectados na REDE através do Dispositivo;
 #Access Controller Huawe AC6005 V200R019C00SPC500,
 #E grava essas inforções em um arquivo .csv; nas colunas
-#["UserID", "Username", "IPADRESS", "MAC", "Status", 'DATA', 'HORA' ]
+#['MAC', 'AP_ID', 'AP_NAME', 'RF/WLAN', 'BAND', 'Type', 'RX/TX', 'RSSI', 'VLAN', 'IPADDRESS', 'SSID', 'DATA', 'HORA']
 #
-#comando de referencia: display access-user
+#comando de referencia: display station all
 #
 #
 #Bibliotecas necessárias
@@ -33,7 +33,7 @@ start = time.time()
 
 connection = ConnectHandler(**switch_1)
 connection.enable()
-command = 'display access-user'
+command = 'display station all'
 
 outputA = connection.send_command(command)
 outputB = str(outputA)
@@ -43,11 +43,11 @@ connection.disconnect()
 
 print(output)
 
-with open('users.csv', 'w') as arquivo:
+with open(os.getenv('dir_stations'), 'w') as arquivo:
     output = output.split('\n')
 
     for valor in output:
-        if re.search('^\s([\d]{1,4})', str(valor)) is None:
+        if re.search('^([0-9A-Fa-f]{4}[:-])', str(valor)[:6]) is None:
             pass
         else:
             arquivo.write(str(valor) + ' ' + timestamp + '\n')

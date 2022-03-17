@@ -43,7 +43,7 @@ outputA = connection.send_command(command)
 outputB = str(outputA)
 output = outputA
 
-with open('neighbor.csv', 'w') as arquivo:
+with open(os.getenv('dir_neighbors'), 'w') as arquivo:
     for mac in mac_list.split('\n'):
         print(command + mac[-14::])
         outputMac = connection.send_command(command + mac[-14::])

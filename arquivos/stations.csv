@@ -1,0 +1,10 @@
+0a37-d4a0-4c9a   5     AP_CWB_ENTRADA    1/1      5G    11ac  156/192    -51   13    172.16.13.69     eterea                  16/03/2022 17:50
+50eb-71c2-1a9b   3     AP_CWB_MEIO       1/1      5G    11ac  86/86      -40   13    172.16.13.56     eterea                  16/03/2022 17:50
+5ccd-5bf3-c091   5     AP_CWB_ENTRADA    1/1      5G    11ac  173/173    -43   13    172.16.13.72     eterea                  16/03/2022 17:50
+5ccd-5bf3-c1bd   3     AP_CWB_MEIO       1/1      5G    11ac  173/173    -41   13    172.16.13.53     eterea                  16/03/2022 17:50
+5ccd-5bf3-c5be   3     AP_CWB_MEIO       1/1      5G    11ac  52/173     -40   13    172.16.13.70     eterea                  16/03/2022 17:50
+5e79-0a7e-90b8   5     AP_CWB_ENTRADA    1/1      5G    11ac  173/192    -55   13    172.16.13.51     eterea                  16/03/2022 17:50
+7c8b-b531-3c4f   5     AP_CWB_ENTRADA    0/1      2.4G  11n   52/39      -66   13    172.16.13.59     eterea                  16/03/2022 17:50
+7e09-131c-a6c6   5     AP_CWB_ENTRADA    1/1      5G    11ac  156/144    -59   13    172.16.13.60     eterea                  16/03/2022 17:50
+9cb7-0d9f-7570   2     AP_BSB_COMERCIAL  0/4      2.4G  11n   65/64      -43   400   10.10.17.102     61_Roost_Omnidata       16/03/2022 17:50
+bc6a-d1fb-b822   1     AP_BSB_ENGENHARIA 1/1      5G    11ac  156/173    -44   13    172.17.13.27     eterea                  16/03/2022 17:50
