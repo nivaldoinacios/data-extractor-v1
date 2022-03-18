@@ -50,6 +50,4 @@ clean.pop()
 clean.remove('')
 clean
 
-clean = df
-df
 #%%
