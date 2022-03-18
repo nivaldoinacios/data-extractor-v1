@@ -51,5 +51,4 @@ with open(os.getenv('dir_users'), 'w') as arquivo:
             pass
         else:
             arquivo.write(str(valor) + ' ' + timestamp + '\n')
-
 #%%
