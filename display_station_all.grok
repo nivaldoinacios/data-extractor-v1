@@ -1,1 +1,0 @@
-%{NOTSPACE:MAC}\s*%{NUMBER:AP_ID}\s*%{NOTSPACE:AP_name}\s*%{NOTSPACE:Rf_WLAN}\s*%{USERNAME:Band}\s*%{USERNAME:Type}\s*%{NOTSPACE:Rx_Tx}\s*%{INT:RSSI}\s*%{NUMBER:VLAN}\s*(%{IPORHOST:IP_Address}|%{NOTSPACE:IP_Address}\s*)%{USERNAME:SSID}\s*
