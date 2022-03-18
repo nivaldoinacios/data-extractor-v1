@@ -25,15 +25,16 @@ df_users_stations = pd.merge(df_users, df_stations, on=['MAC'])
 df_users_stations = df_users_stations.drop(columns=['DATA_x', 'HORA_x'])
 
 #metodo para imprimir o dataframe em .csv
-# df_users_stations.to_csv(os.getenv('dir_users_stations'), index=False)
-#%%
+df_users_stations.to_csv(os.getenv('dir_users_stations'), index=False)
 ####INDEX ELASTIC
 ##MÉTODO TEMPORARIO
-doc = df_users_stations.to_json(orient='columns')
-print(doc)
-id_doc = 1
-id_doc = id_doc + 1
-resp = es.index(index='heatmap*', id=id_doc, document=doc)
-print(resp['result'])
+#####@cria um arquivo json
+# doc = df_users_stations.to_json('doc.json', orient='columns')
+#####@cria uma variavel q recebe o dataframe convertido em json
+# doc = df_users_stations.to_json(orient='columns')
+# #####@Index, auto id,
+# resp = es.index(index="test-index", document=doc)
+# print(resp['result'])
+
 
 #%%

@@ -58,4 +58,5 @@ with open(os.getenv('dir_neighbors'), 'w') as arquivo:
 connection.disconnect()
 
 print(output)
+
 #%%
