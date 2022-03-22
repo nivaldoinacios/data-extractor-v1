@@ -22,7 +22,7 @@ df_stations.columns = ['MAC', 'AP_ID', 'AP_NAME', 'RF/WLAN', 'BAND', 'Type',
                        'RX/TX', 'RSSI', 'VLAN', 'IPADDRESS', 'SSID', 'DATA', 'HORA']
 
 df_users_stations = pd.merge(df_users, df_stations, on=['MAC'])
-df_users_stations = df_users_stations.drop(columns=['DATA_x', 'HORA_x'])
+df_users_stations = df_users_stations.drop(columns=['IPADDRESS_x','DATA_x', 'HORA_x'])
 
 #metodo para imprimir o dataframe em .csv
 df_users_stations.to_csv(os.getenv('dir_users_stations'), index=False)
