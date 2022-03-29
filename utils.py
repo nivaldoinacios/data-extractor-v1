@@ -17,3 +17,5 @@ AC6005 = {
     'global_delay_factor': 0.1,
 }
 
+
+#%%

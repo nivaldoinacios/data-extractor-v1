@@ -47,3 +47,5 @@ with open(os.getenv('dir_stations'), 'w') as arquivo:
         else:
             arquivo.write(str(valor) + ' ' + timestamp + '\n')
 
+
+#%%
