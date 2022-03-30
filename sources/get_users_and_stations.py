@@ -1,6 +1,5 @@
 from utils import *
 
-start = time.time()
 
 connection = HuaweiTelnet(**AC6005)
 connection.enable()
@@ -44,6 +43,5 @@ with open(os.getenv('dir_stations'), 'w') as arquivo:
             pass
         else:
             arquivo.write(str(valor) + ' ' + timestamp + '\n')
-
 
 # ~transformar em função
