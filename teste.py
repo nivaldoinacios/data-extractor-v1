@@ -1,10 +1,10 @@
-from utils import *
-
+from useful_libraries.utils import *
+from netmiko.huawei import HuaweiTelnet
 load_dotenv()
 
 start = time.time()
 
-connection = ConnectHandler(**AC6005)
+connection = HuaweiTelnet(**AC6005)
 connection.enable()
 
 command = 'display access-user'

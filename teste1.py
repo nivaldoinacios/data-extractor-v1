@@ -1,10 +1,20 @@
-from utils import *
+AC6005 = {
+    'device_type': 'huawei',
+    'host': '172.17.1.150',
+    'username': 'netmiko',
+    'password': '#Roost2021!',
+    'global_delay_factor': 0.1,
+}
 
+from useful_libraries.utils import *
+from netmiko.huawei import HuaweiTelnet
 load_dotenv()
+
+
 
 start = time.time()
 
-connection = ConnectHandler(**AC6005)
+connection = HuaweiTelnet(**AC6005)
 connection.enable()
 
 command = 'display access-user'
