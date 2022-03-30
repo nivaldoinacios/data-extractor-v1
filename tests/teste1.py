@@ -6,7 +6,7 @@ AC6005 = {
     'global_delay_factor': 0.1,
 }
 
-from useful_libraries.utils import *
+from utils.world_itens import *
 from netmiko.huawei import HuaweiTelnet
 load_dotenv()
 

@@ -117,7 +117,4 @@ dmypy.json
 .editorconfig
 .gitignore
 .gitattributes
-
-#outros
-.env
-arquivos
+resources

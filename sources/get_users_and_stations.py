@@ -1,10 +1,8 @@
-from useful_libraries.utils import *
-
-load_dotenv()
+from utils import *
 
 start = time.time()
 
-connection = ConnectHandler(**AC6005)
+connection = HuaweiTelnet(**AC6005)
 connection.enable()
 
 command = 'display access-user'
@@ -13,7 +11,7 @@ outputA = connection.send_command(command)
 outputB = str(outputA)
 output = outputA
 
-#output[303:] essa posição imprime sem o cabeçalho
+# output[303:] essa posição imprime sem o cabeçalho
 print(output)
 
 with open(os.getenv('dir_users'), 'w') as arquivo:
@@ -25,8 +23,8 @@ with open(os.getenv('dir_users'), 'w') as arquivo:
         else:
             arquivo.write(str(valor) + ' ' + timestamp + '\n')
 
-#sleep
-time.sleep(0.30)
+# sleep
+time.sleep(0.10)
 
 command = 'display station all'
 
@@ -48,4 +46,4 @@ with open(os.getenv('dir_stations'), 'w') as arquivo:
             arquivo.write(str(valor) + ' ' + timestamp + '\n')
 
 
-#%%
+# ~transformar em função

@@ -1,5 +1,5 @@
-#criação do arquivo da lista MAC em .csv
-# import access_user
+# criação do arquivo da lista MAC em .cs
+
 from dotenv import load_dotenv
 import pandas as pd
 import os
