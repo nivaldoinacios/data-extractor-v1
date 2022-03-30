@@ -1,27 +1,25 @@
-AC6005 = {
-    'device_type': 'huawei',
-    'host': '172.17.1.150',
-    'username': 'netmiko',
-    'password': '#Roost2021!',
-    'global_delay_factor': 0.1,
-}
-
 from utils.world_itens import *
-from netmiko.huawei import HuaweiTelnet
-load_dotenv()
-
-
-
-start = time.time()
+from utils.device_list import *
 
 connection = HuaweiTelnet(**AC6005)
 connection.enable()
 
 command = 'display access-user'
 
-outputA = connection.send_command(command)
-outputB = str(outputA)
-output = outputA
+output = connection.send_command(command)
 
-#output[303:] essa posição imprime sem o cabeçalho
-print(output)
+connection.disconnect()
+
+# output[303:] essa posição imprime sem o cabeçalho
+# print(output)
+
+output = output.split('\n')
+lista_user = []
+
+for line in output:
+    if re.search('^\s([\d]{1,4})', str(line)) is None:
+        pass
+    else:
+        lista_user.append(line + ' ' + timestamp + '\n')
+
+print(lista_user)

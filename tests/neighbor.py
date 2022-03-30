@@ -1,12 +1,12 @@
 #
-#Access Controller Huawe AC6005 V200R019C00SPC500,
+# Access Controller Huawe AC6005 V200R019C00SPC500,
 #
-#['MAC']
-#
-#
+# ['MAC']
 #
 #
-#Bibliotecas necessárias
+#
+#
+# Bibliotecas necessárias
 import time
 import pandas as pd
 from ListaMac import mac_list
@@ -16,6 +16,7 @@ from netmiko import ConnectHandler
 import netmiko
 import re
 import os
+
 load_dotenv()
 
 start = time.time()
@@ -59,4 +60,6 @@ connection.disconnect()
 
 print(output)
 
-#%%
+# %%
+
+# access_user output[303:] Esta posição imprime sem o cabeçalho
