@@ -24,6 +24,3 @@ df_users_stations = df_users_stations.drop(columns=['IPADDRESS_x', '@timestamp-p
 # #####@Index, auto id,
 # resp = es.index(index="test-index", document=doc)
 # print(resp['result'])
-
-
-# %%
