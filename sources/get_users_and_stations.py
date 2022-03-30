@@ -1,6 +1,8 @@
-from utils import *
+# Importa funções globais e a lista de dispositivos
+from utils.world_itens import *
+from utils.device_list import *
 
-
+# Conexão com o dispositivo e obtenção dos dados
 connection = HuaweiTelnet(**AC6005)
 connection.enable()
 
@@ -13,6 +15,7 @@ output = outputA
 # output[303:] essa posição imprime sem o cabeçalho
 print(output)
 
+# Criação do arquivo de saída com os dados obtidos
 with open(os.getenv('dir_users'), 'w') as arquivo:
     output = output.split('\n')
 
@@ -23,7 +26,7 @@ with open(os.getenv('dir_users'), 'w') as arquivo:
             arquivo.write(str(valor) + ' ' + timestamp + '\n')
 
 # sleep
-time.sleep(0.10)
+time.sleep(0.25)
 
 command = 'display station all'
 

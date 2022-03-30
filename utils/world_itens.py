@@ -10,6 +10,3 @@ load_dotenv()
 
 global timestamp
 timestamp = time.strftime("""%Y-%m-%d'T'%H:%M:%S%z""")
-
-global start
-start = time.time()

@@ -1,8 +1,8 @@
 # Lista de dispositivos
 
 # importa os modulos necessarios
-from netmiko.huawei import HuaweiTelnet
 from utils.world_itens import (load_dotenv, os)
+from netmiko.huawei import HuaweiTelnet
 
 # carrega as variaveis de ambiente
 # load_dotenv()
