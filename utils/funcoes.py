@@ -16,3 +16,12 @@ def limpar_output(output):
             result.append(line + ' ' + timestamp + '\n')
 
     return result
+
+
+def gerar_lista_mac(lista):
+    result = []
+
+    for line in lista:
+        result.append(line[:14])
+
+    return result

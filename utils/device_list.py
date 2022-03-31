@@ -15,5 +15,5 @@ AC6005 = {
     'host': os.getenv('HOST'),
     'username': os.getenv('USUARIO'),
     'password': os.getenv('PASSWORD'),
-    'global_delay_factor': 1.0,
+    'global_delay_factor': 0.5,
 }

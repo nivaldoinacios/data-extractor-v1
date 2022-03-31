@@ -10,3 +10,9 @@ load_dotenv()
 
 global timestamp
 timestamp = time.strftime("""%Y-%m-%d'T'%H:%M:%S%z""")
+
+global lista_users
+lista_users = []
+
+global lista_stations
+lista_stations = []

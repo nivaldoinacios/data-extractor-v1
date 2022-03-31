@@ -2,11 +2,11 @@
 from utils.world_itens import *
 from utils.device_list import *
 
-global lista_users
-lista_users = []
-
-global lista_stations
-lista_stations = []
+# global lista_users
+# lista_users = []
+#
+# global lista_stations
+# lista_stations = []
 
 # Conexão com o dispositivo e obtenção dos dados
 connection = HuaweiTelnet(**AC6005)
@@ -23,11 +23,7 @@ for line in output:
     else:
         lista_users.append(line + ' ' + timestamp + '\n')
 
-print(lista_users)
-
-
-time.sleep(0.25)
-
+# print(lista_users)
 
 command = 'display station all'
 output = connection.send_command(command)
@@ -41,7 +37,7 @@ for line in output:
     else:
         lista_stations.append(line + ' ' + timestamp + '\n')
 
-print(lista_stations)
+# print(lista_stations)
 
 connection.disconnect()
 # ~transformar em função
