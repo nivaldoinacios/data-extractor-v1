@@ -2,12 +2,17 @@
 
 # importa os modulos necessarios
 from utils.world_itens import (load_dotenv, os)
-from netmiko.huawei import HuaweiTelnet
 
-# carrega as variaveis de ambiente
-# load_dotenv()
+# Lista de dispositivos
+# global dispositivos_huawei
+#
+# dispositivos_huawei = []
+# dispositivos_cisco = []
+# dispositivos_aruba = []
+# dispositivos_extreme = []
+# dispositivos_alcatel = []
+# dispositivos_avaya = []
 
-# declara as variaveis(dispositivos) como globais
 global AC6005
 
 AC6005 = {

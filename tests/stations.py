@@ -11,7 +11,7 @@ import time
 from datetime import datetime
 from dotenv import load_dotenv
 from netmiko import ConnectHandler
-import netmiko
+
 import re
 import os
 

@@ -1,6 +1,6 @@
 # Importa funções globais e a lista de dispositivos
 from utils.world_itens import *
-from utils.device_list import *
+from device_list import *
 
 # Conexão com o dispositivo e obtenção dos dados
 connection = HuaweiTelnet(**AC6005)

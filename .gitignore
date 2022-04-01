@@ -118,3 +118,6 @@ dmypy.json
 .gitignore
 .gitattributes
 resources
+tests
+.idea
+.resources

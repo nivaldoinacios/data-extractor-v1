@@ -1,4 +1,3 @@
-import get_users_and_stations
 import pandas as pd
 import os
 

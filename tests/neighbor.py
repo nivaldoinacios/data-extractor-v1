@@ -1,12 +1,3 @@
-#
-# Access Controller Huawe AC6005 V200R019C00SPC500,
-#
-# ['MAC']
-#
-#
-#
-#
-# Bibliotecas necessárias
 import time
 import pandas as pd
 from ListaMac import mac_list
