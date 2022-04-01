@@ -1,8 +1,8 @@
-from utils.funcoes import (limpar_access_user)
 from requests_huawei.access_user import output
+from utils.funcoes import (limpar_output)
 
-limpar_access_user(output)
+regx = '^\s([\d]{1,4})'
 
-lista_users = limpar_access_user(output)
+limpar_output(output, regx)
 
-print(lista_users)
+lista_users = limpar_output(output, regx)

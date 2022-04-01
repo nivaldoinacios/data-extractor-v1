@@ -5,8 +5,8 @@
       <sourceFolder url="file://$MODULE_DIR$/sources" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/deprecated" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/requests_huawei" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/resources" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.8 (venv)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

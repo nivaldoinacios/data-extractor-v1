@@ -22,3 +22,4 @@ AC6005 = {
     'password': os.getenv('PASSWORD'),
     'global_delay_factor': 0.5,
 }
+

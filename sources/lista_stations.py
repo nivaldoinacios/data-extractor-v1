@@ -1,8 +1,8 @@
-from utils.funcoes import (limpar_display_stations)
 from requests_huawei.display_station_all import output
+from utils.funcoes import (limpar_output)
 
-limpar_display_stations(output)
+regx = '^([0-9A-Fa-f]{4}[:-])'
 
-lista_stations = limpar_display_stations(output)
+limpar_output(output, regx)
 
-print(lista_stations)
+lista_stations = limpar_output(output, regx)
