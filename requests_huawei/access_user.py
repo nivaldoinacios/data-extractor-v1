@@ -1,5 +1,5 @@
-from netmiko.huawei import HuaweiTelnet
 from requests_huawei.device_list import *
+from netmiko.huawei import HuaweiTelnet
 
 connection = HuaweiTelnet(**AC6005)
 connection.enable()

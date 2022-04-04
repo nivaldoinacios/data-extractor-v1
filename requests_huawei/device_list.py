@@ -1,7 +1,7 @@
-# Lista de dispositivos
+from dotenv import load_dotenv
+import os
 
-# importa os modulos necessarios
-from utils.world_itens import (load_dotenv, os)
+load_dotenv()
 
 # Lista de dispositivos
 # global dispositivos_huawei

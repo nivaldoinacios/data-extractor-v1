@@ -1,4 +1,4 @@
-from .world_itens import (re, timestamp)
+from utils.world_itens import (re, timestamp)
 
 
 def limpar_output(output, regx):
