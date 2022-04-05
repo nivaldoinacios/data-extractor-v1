@@ -1,14 +1,23 @@
-from dataframes.df_users_and_stations import (doc)
-from elasticsearch import Elasticsearch
 from utils.world_itens import (os, load_dotenv)
+from dataframes.df_users_and_stations import df
+from elasticsearch import Elasticsearch
+import eland as ed
+import pandas as pd
+import numpy as np
+
 
 load_dotenv()
+
 
 es = Elasticsearch(
     ['http://192.168.10.14:9200'],
     basic_auth=(os.getenv('ELK_USERNAME'), os.getenv('ELK_PASSWORD'))
 )
 
-
-resp = es.index(index="teste-index", document=doc)
-print(resp['result'])
+df_ed = ed.pandas_to_eland(
+    pd_df=df,
+    es_client=es,
+    es_dest_index='teste-index',
+    es_if_exists='replace',
+    es_refresh=True,
+)
