@@ -9,7 +9,7 @@ load_dotenv()
 # variaveis globais
 
 global timestamp
-timestamp = time.strftime("""%Y-%m-%d'T'%H:%M:%S%z""")
+timestamp = time.strftime("""%Y-%m-%dT%H:%M:%S%z""")
 
 global lista_users
 lista_users = []

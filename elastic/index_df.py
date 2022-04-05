@@ -10,5 +10,5 @@ es = Elasticsearch(
 )
 
 
-resp = es.index(index="fluxo", document=doc)
+resp = es.index(index="teste-index", document=doc)
 print(resp['result'])

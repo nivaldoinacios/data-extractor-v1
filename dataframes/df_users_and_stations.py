@@ -14,4 +14,3 @@ df = df.drop(columns=['IPADDRESS_y', '@timestamp-py_x'])
 
 doc = df.to_dict(orient='records')
 
-
