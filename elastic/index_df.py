@@ -17,7 +17,7 @@ es = Elasticsearch(
 df_ed = ed.pandas_to_eland(
     pd_df=df,
     es_client=es,
-    es_dest_index='teste-index',
-    es_if_exists='replace',
+    es_dest_index='eland-fluxo',
+    es_if_exists='append',
     es_refresh=True,
 )
