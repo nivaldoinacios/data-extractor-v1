@@ -41,16 +41,3 @@ async def steps():
 
 asyncio.run(steps())
 #%%
-
-
-WorldItem.lista_mac = gerar_lista_mac(WorldItem.lista_stations)
-print(WorldItem.lista_mac)
-#%%
-async def third_step():
-    await asyncio.sleep(1)
-    gerar_lista_mac(WorldItem.lista_stations)
-    WorldItem.lista_mac = gerar_lista_mac(
-        WorldItem.lista_stations
-    )
-    return WorldItem.lista_mac
-#%%
