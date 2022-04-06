@@ -1,6 +1,8 @@
 # Package resource API
 import io
 import re
+import time
+import asyncio
 import inspect
 import textwrap
 import functools

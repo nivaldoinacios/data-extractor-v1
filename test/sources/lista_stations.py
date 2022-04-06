@@ -12,36 +12,23 @@ lista_stations = limpar_output(output, regx)
 lista_stations = separar_campos(lista_stations)
 
 
-def __init__(self):
-    self.net_connect = ConnectHandler(**homeRTR)
+stepIn = fluxoHuawei()
 
+stepIn.display_access_users()
 
-def show_dhcp_binding(self, mac_end):
-    command = 'show ip dhcp binding | incl ' + mac_end
-    output = self.net_connect.send_command(command)
-    #        self.net_connect.disconnect()
-    return output.split('\n')
+stepIn.display_station_all()
 
+lista_mac = gerar_lista_mac(WorldItem.lista_users)
 
-def ping_ipaddr(self, ipaddr):
-    command = 'ping ' + ipaddr
-    output = self.net_connect.send_command(command)
-    #        self.net_connect.disconnect()
-    return output.split('\n')
-
-
-def show_arp(self, mac_end):
-    command = 'show arp | incl ' + mac_end
-    output = self.net_connect.send_command(command)
-    #        self.net_connect.disconnect()
-    return output.split('\n')
-
-
-def add_dhcp_client(self, config_list):
-    output = self.net_connect.send_config_set(config_list)
-    return output.split('\n')
-
-
-def delete_dhcp_client(self, config_list):
-    output = self.net_connect.send_config_set(config_list)
-    return output.split('\n')
+# 1. Gerar lista de MACs
+lista_mac = gerar_lista_mac()
+# 2. Abrir conexão com o servidor
+huawei = HuaweiTelnet()
+# 3. Enviar MACs para o servidor
+await huawei.enviar_macs(lista_mac)
+# 4. Receber resposta do servidor
+resposta = await huawei.receber_resposta()
+# 5. Processar resposta
+fluxoHuawei(resposta)
+# 6. Fechar conexão com o servidor
+await huawei.fechar_conexao()
