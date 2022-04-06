@@ -12,10 +12,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-global WorldItens
+global WorldItem
 
 
-class WorldItens:
+class WorldItem:
 
     timestamp = time.strftime("""%Y-%m-%dT%H:%M:%S%z""")
 
@@ -45,8 +45,4 @@ class AccessControllers:
 # lista_de_dispositivos = []
 # lista_de_dispositivos = [AccessControllers.AC6005]
 
-
-global lista_de_comandos
-
-lista_de_comandos = []
 lista_de_comandos = ['display access-user', 'display station all']
