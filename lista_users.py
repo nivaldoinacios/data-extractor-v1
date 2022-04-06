@@ -1,5 +1,5 @@
-from utils.funcoes import (limpar_output, separar_campos)
-from requests_huawei.access_user import output
+from utils import (limpar_output, separar_campos)
+from access_user import output
 
 regx = '^\s([\d]{1,4})'
 

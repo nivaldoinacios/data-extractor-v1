@@ -1,5 +1,5 @@
 from netmiko.huawei import HuaweiTelnet
-from requests_huawei.device_list import *
+from device_list import *
 
 
 connection = HuaweiTelnet(**AC6005)

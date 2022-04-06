@@ -1,5 +1,7 @@
-from utils.world_itens import (re, timestamp)
+from pkg_resources import (WorldItens, re)
 
+
+def get_huawei_output(**kwargs, command) # verificar funçoes de chamada netmiko
 
 def limpar_output(output, regx):
     output = output.split('\n')
@@ -10,28 +12,9 @@ def limpar_output(output, regx):
         if re.search(regx, str(line)) is None:
             pass
         else:
-            result.append(line + ' ' + timestamp + '\n')
+            result.append(line + ' ' + WorldItens.timestamp + '\n')
 
     return result
-
-
-def gerar_lista_mac(lista):
-    result = []
-
-    for line in lista:
-        result.append(line[0])
-
-    return result
-
-
-# Deprecated
-# def gerar_lista_mac(lista):
-#     result = []
-#
-#     for line in lista:
-#         result.append(line[:14])
-#
-#     return result
 
 
 def separar_campos(lista):
@@ -48,3 +31,11 @@ def separar_campos(lista):
 
     return result
 
+
+def gerar_lista_mac(lista):
+    result = []
+
+    for line in lista:
+        result.append(line[0])
+
+    return result

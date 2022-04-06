@@ -1,5 +1,5 @@
-from utils.funcoes import (limpar_output, separar_campos)
-from requests_huawei.display_station_all import output
+from utils import (limpar_output, separar_campos)
+from display_station_all import output
 
 regx = '^([0-9A-Fa-f]{4}[:-])'
 

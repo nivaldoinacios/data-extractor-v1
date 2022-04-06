@@ -1,5 +1,5 @@
-from sources.lista_stations import lista_stations
-from sources.lista_users import lista_users
+from lista_stations import lista_stations
+from lista_users import lista_users
 import pandas as pd
 
 df_stations = pd.DataFrame(lista_stations, columns=['MAC', 'AP_ID', 'AP_NAME', 'RF/WLAN', 'BAND', 'Type',
@@ -14,3 +14,5 @@ df = df.rename(columns={'@timestamp-py_y': '@timestamp-py'})
 df = df.rename(columns={'IPADDRESS_x': 'IPADDRESS'})
 
 df = df.fillna(0)
+
+
