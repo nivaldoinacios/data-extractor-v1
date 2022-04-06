@@ -36,5 +36,17 @@ class AccessControllers:
         'host': os.getenv('HOST'),
         'username': os.getenv('USUARIO'),
         'password': os.getenv('PASSWORD'),
-        'global_delay_factor': 0.5,
+        'global_delay_factor': 1.0,
     }
+
+
+# global lista_de_dispositivos
+
+# lista_de_dispositivos = []
+# lista_de_dispositivos = [AccessControllers.AC6005]
+
+
+global lista_de_comandos
+
+lista_de_comandos = []
+lista_de_comandos = ['display access-user', 'display station all']

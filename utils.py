@@ -1,8 +1,6 @@
 from pkg_resources import (WorldItens, re)
 
 
-def get_huawei_output(**kwargs, command) # verificar funçoes de chamada netmiko
-
 def limpar_output(output, regx):
     output = output.split('\n')
     result = []
