@@ -15,4 +15,8 @@ df = df.rename(columns={'IPADDRESS_x': 'IPADDRESS'})
 
 df = df.fillna(0)
 
+df
 
+
+
+#%%
