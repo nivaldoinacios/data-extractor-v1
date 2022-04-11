@@ -11,6 +11,3 @@ es = Elasticsearch(
 with open(os.getenv('dir_users_stations'), 'r') as f:
     reader = csv.DictReader(f, delimiter=';')
     helpers.bulk(es, reader, index='teste1')
-
-
-#%%
