@@ -1,94 +1,42 @@
-from netmiko.huawei import HuaweiTelnet
-from pkg_resources import (
-    AccessControllers,
+from pkg_resources import time, asyncio
+from utils import (
+    gerar_lista_mac,
+    # HuaweiTelnet,
+    fluxoHuawei,
     WorldItem,
-    re,
 )
 
-
-def limpar_output(output, regx):
-    output = output.split('\n')
-    result = []
-
-    for line in output:
-
-        if re.search(regx, str(line)) is None:
-            pass
-        else:
-            result.append(line + ' ' + WorldItem.timestamp + '\n')
-
-    return result
+stepIn = fluxoHuawei()
 
 
-def separar_campos(lista):
-    result = []
-
-    for line in lista:
-        lista = str(lista)
-
-        line = line.strip()
-
-        line = line.split()
-
-        result.append(line)
-
-    return result
+async def first_step():
+    await asyncio.sleep(0.5)
+    stepIn.display_access_users()
 
 
-def gerar_lista_mac(lista):
-    result = []
-
-    for line in lista:
-        result.append(line[0])
-
-    return result
+async def second_step():
+    await asyncio.sleep(0.5)
+    stepIn.display_station_all()
 
 
-# rever o nome do dispositivo e forma de conexao -> 'issue_1'
-# criar um metodo para criar um objeto de conexao com o dispositivo
+async def third_step():
+    await asyncio.sleep(1)
+    gerar_lista_mac(WorldItem.lista_stations)
+    WorldItem.lista_mac = gerar_lista_mac(
+        WorldItem.lista_stations
+    )
+    return WorldItem.lista_mac
 
 
-class fluxoHuawei:
-    # issue_1
-    def __init__(self):
-        pass
+async def steps():
+    print(f'Iniciando o fluxo de steps {time.strftime("%H:%M:%S")}')
 
-    @staticmethod
-    def display_access_users():
+    first_task = asyncio.create_task(first_step())
+    second_task = asyncio.create_task(second_step())
+    third_task = asyncio.create_task(third_step())
+    await first_task
+    await second_task
+    await third_task
+    print(f'Finalizando o fluxo de steps {time.strftime("%H:%M:%S")}')
 
-        connection = HuaweiTelnet(**AccessControllers.AC6005)
-        command = 'display access-user'
-        output = connection.send_command(command)
-
-        WorldItem.lista_users = limpar_output(
-            output,
-            WorldItem.regx_userid
-        )
-
-        WorldItem.lista_users = separar_campos(
-            WorldItem.lista_users
-        )
-
-        connection.disconnect()
-
-        return WorldItem.lista_users
-
-    @staticmethod
-    def display_station_all():
-
-        connection = HuaweiTelnet(**AccessControllers.AC6005)
-        command = 'display station all'
-        output = connection.send_command(command)
-
-        WorldItem.lista_stations = limpar_output(
-            output,
-            WorldItem.regx_mac
-        )
-
-        WorldItem.lista_stations = separar_campos(
-            WorldItem.lista_stations
-        )
-
-        connection.disconnect()
-
-        return WorldItem.lista_stations
+asyncio.run(steps())
