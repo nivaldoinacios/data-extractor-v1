@@ -1,5 +1,6 @@
 from pkg_resources import time, asyncio
 import pandas as pd
+import numpy as np
 from utils import (
     gerar_lista_mac,
     # HuaweiTelnet,
@@ -57,6 +58,5 @@ df = df.drop(columns=['IPADDRESS_y', '@timestamp-py_x'])
 df = df.rename(columns={'@timestamp-py_y': '@timestamp-py'})
 df = df.rename(columns={'IPADDRESS_x': 'IPADDRESS'})
 df = df.fillna(0)
-#%%
-df
+
 #%%

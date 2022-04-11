@@ -41,3 +41,64 @@ df
 # #%%
 # df_users
 # #%%
+########$$$$$$$$$$$
+#
+# es = Elasticsearch(
+#     ['http://192.168.10.14:9200'],
+#     basic_auth=(os.getenv('ELK_USERNAME'), os.getenv('ELK_PASSWORD'))
+# )
+#
+# df_ed = ed.pandas_to_eland(
+#     pd_df=df,
+#     es_client=es,
+#     es_dest_index='eland-fluxo',
+#     es_type_overrides={
+#         "@timestamp": "date"
+#     },
+#     es_if_exists='append',
+#     es_refresh=True,
+# )
+#
+# exec('df_ed')
+#
+# time.sleep(2)
+#
+# df.to_csv(os.getenv('dir_users_stations'), sep=';', na_rep=0, header=False, index=False, line_terminator='\n')
+
+###
+# df.to_csv(os.getenv('dir_users_stations'), sep=';', header=True, index=False, line_terminator='\n')
+# i = df.to_csv(path_or_buf=None, sep=';', na_rep=0, header=False, index=False, line_terminator='\n')
+# i.split('\n').pop()
+# ed.csv_to_eland(
+#     filepath_or_buffer=textStream,
+#     es_client=es,
+#     es_dest_index='teste',
+#     es_if_exists='replace',
+#     es_refresh=True,
+# )
+
+###################
+es = Elasticsearch(
+    ['http://192.168.10.14:9200'],
+    basic_auth=(os.getenv('ELK_USERNAME'), os.getenv('ELK_PASSWORD'))
+)
+#%%
+textStream = StringIO(newline='\n')
+#%%
+df.to_csv(path_or_buf=textStream, sep=';', columns=['UserID', 'Username', 'IPADDRESS', 'MAC', 'Status', 'AP_ID',
+                                                    'AP_NAME', 'RF/WLAN', 'BAND', 'Type', 'RX/TX', 'RSSI', 'VLAN',
+                                                    'SSID', '@timestamp-py'],
+          header=True, index=True, index_label='index', line_terminator='\n')
+#%%
+print(textStream.getvalue())
+#%%
+ed.csv_to_eland(
+    filepath_or_buffer=textStream,
+    es_client=es,
+    es_dest_index='teste',
+    es_if_exists='replace',
+    es_refresh=True,
+)
+#%%
+print(textStream.getvalue())
+#%%
