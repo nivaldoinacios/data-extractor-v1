@@ -5,6 +5,8 @@
       <sourceFolder url="file://$MODULE_DIR$/deprecated" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/deprecated/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/elastic" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -10,12 +10,12 @@ stepIn = fluxoHuawei()
 
 
 async def first_step():
-    await asyncio.sleep(0.5)
+    await asyncio.sleep(1)
     stepIn.display_access_users()
 
 
 async def second_step():
-    await asyncio.sleep(0.5)
+    await asyncio.sleep(1)
     stepIn.display_station_all()
 
 
@@ -49,7 +49,6 @@ async def fourth_step():
                        'AP_NAME', 'RF/WLAN', 'BAND', 'Type', 'RX/TX', 'RSSI', 'VLAN',
                        'SSID', '@timestamp-py'],
               header=True, index=True, index_label='index', line_terminator='\n')
-
     return df
 
 

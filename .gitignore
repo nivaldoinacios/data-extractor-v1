@@ -117,6 +117,5 @@ dmypy.json
 .editorconfig
 .gitignore
 .gitattributes
-tests
 .idea
-.csvs
+test
