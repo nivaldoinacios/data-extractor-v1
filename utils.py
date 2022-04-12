@@ -2,6 +2,7 @@ from netmiko import ConnectHandler
 from pkg_rsrcs import (
     AccessControllers,
     WorldItem,
+    threading,
     time,
     re,
 )
@@ -43,6 +44,15 @@ def gerar_lista_mac(lista):
         result.append(line[0])
 
     return result
+
+
+def set_interval(func, sec):
+    def func_wrapper():
+        set_interval(func, sec)
+        func
+    t = threading.Timer(sec, func_wrapper)
+    t.start()
+    return t
 
 
 # rever o nome do dispositivo e forma de conexao -> 'issue_1'

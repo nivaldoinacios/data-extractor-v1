@@ -1,6 +1,6 @@
+from elasticsearch import Elasticsearch, helpers
 from dotenv import load_dotenv
 import threading
-import asyncio
 import time
 import csv
 import os
@@ -25,6 +25,13 @@ class WorldItem:
     list_mac = []
 
     df = None
+
+    es = Elasticsearch(
+        ['http://192.168.10.14:9200'],
+        basic_auth=(
+            os.getenv('ELK_USERNAME'),
+            os.getenv('ELK_PASSWORD'))
+    )
 
 
 global AccessControllers

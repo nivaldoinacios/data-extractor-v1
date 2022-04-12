@@ -1,15 +1,8 @@
 #!/usr/bin/python3
-import pandas as pd
-from pkg_rsrcs import (time, csv, os)
 from elasticsearch import Elasticsearch, helpers
-from utils import (gerar_lista_mac, fluxoHuawei, WorldItem)
-
-es = Elasticsearch(
-    ['http://192.168.10.14:9200'],
-    basic_auth=(
-        os.getenv('ELK_USERNAME'),
-        os.getenv('ELK_PASSWORD'))
-)
+from pkg_rsrcs import csv, os
+from utils import *
+import pandas as pd
 
 
 def first_step():
@@ -19,9 +12,9 @@ def first_step():
     try:
         fluxoHuawei.get_users_stations()
     except Exception as e:
-        print(f'Erro ao executar o : {e}')
+        print(f'Erro ao executar o Step 1 {e}')
 
-    print(f'{e} Concluido: {time.strftime("%H:%M:%S")}')
+    print(f'Step 1 Concluido: {time.strftime("%H:%M:%S")}')
 
     return WorldItem.list_users, WorldItem.list_stations
 
@@ -69,8 +62,8 @@ def third_step():
     return WorldItem.df
 
 
-def run():
-    print(f'Iniciando o fluxo de steps {time.strftime("%H:%M:%S")}')
+def run_etl():
+    print(f'Iniciando processo ETL {time.strftime("%H:%M:%S")}')
 
     first_step()
     second_step()
@@ -87,7 +80,7 @@ def post_data():
     try:
         with open(os.getenv('dir_users_stations'), 'r') as f:
             reader = csv.DictReader(f, delimiter=';')
-            helpers.bulk(es, reader, index='fluxo')
+            helpers.bulk(WorldItem.es, reader, index='fluxo')
 
             time.sleep(1)
 
@@ -95,10 +88,9 @@ def post_data():
     except Exception as e:
         print(f'Erro ao executar o : {e}')
 
-    print(f'Finalizando o post dos dados {time.strftime("%H:%M:%S")}')
+    print(f'{e} Concluido: {time.strftime("%H:%M:%S")}')
 
 
-run()
-
+run_etl()
 
 post_data()
