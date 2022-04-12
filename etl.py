@@ -1,7 +1,9 @@
-import csv
-import threading
+#!/usr/bin/python3
 from elasticsearch import Elasticsearch, helpers
-from pkg_resources import asyncio, time, os
+from pkg_resources import (
+    threading, asyncio,
+    time, csv, os
+)
 import pandas as pd
 from utils import (
     gerar_lista_mac,
@@ -66,6 +68,8 @@ async def fifth_step():
         reader = csv.DictReader(f, delimiter=';')
         helpers.bulk(es, reader, index='fluxo')
 
+    f.close()
+
 
 async def steps():
     print(f'Iniciando o fluxo de steps {time.strftime("%H:%M:%S")}')
@@ -97,4 +101,6 @@ def run():
     asyncio.run(steps())
 
 
-set_interval(run, 120)
+run()
+
+set_interval(run, 180)
