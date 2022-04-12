@@ -58,8 +58,7 @@ class fluxoHuawei:
 
         connection = HuaweiTelnet(**AccessControllers.AC6005)
         command = 'display access-user'
-        output = connection.send_command(command,
-                                         read_timeout=60)
+        output = connection.send_command(command, read_timeout=60)
 
         WorldItem.lista_users = limpar_output(
             output,
@@ -79,8 +78,7 @@ class fluxoHuawei:
 
         connection = HuaweiTelnet(**AccessControllers.AC6005)
         command = 'display station all'
-        output = connection.send_command(command,
-                                         read_timeout=60)
+        output = connection.send_command(command, read_timeout=60)
 
         WorldItem.lista_stations = limpar_output(
             output,
