@@ -118,4 +118,5 @@ dmypy.json
 .gitignore
 .gitattributes
 .idea
+.csvs
 test

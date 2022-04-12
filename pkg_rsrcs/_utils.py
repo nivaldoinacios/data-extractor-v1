@@ -1,6 +1,11 @@
 from dotenv import load_dotenv
+import threading
+import asyncio
 import time
+import csv
 import os
+import io
+import re
 
 load_dotenv()
 
@@ -15,9 +20,11 @@ class WorldItem:
     regx_mac = '^([0-9A-Fa-f]{4}[:-])'
     regx_userid = '^\s([\d]{1,4})'
 
-    lista_stations = []
-    lista_users = []
-    lista_mac = []
+    list_stations = []
+    list_users = []
+    list_mac = []
+
+    df = None
 
 
 global AccessControllers

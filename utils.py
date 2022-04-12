@@ -1,7 +1,8 @@
-from netmiko.huawei import HuaweiTelnet
-from pkg_resources import (
+from netmiko import ConnectHandler
+from pkg_rsrcs import (
     AccessControllers,
     WorldItem,
+    time,
     re,
 )
 
@@ -56,10 +57,9 @@ class fluxoHuawei:
     @staticmethod
     def display_access_users():
 
-        connection = HuaweiTelnet(**AccessControllers.AC6005)
+        connection = ConnectHandler(**AccessControllers.AC6005)
         command = 'display access-user'
-        output = connection.send_command(command,
-                                         read_timeout=60)
+        output = connection.send_command(command)
 
         WorldItem.lista_users = limpar_output(
             output,
@@ -77,10 +77,9 @@ class fluxoHuawei:
     @staticmethod
     def display_station_all():
 
-        connection = HuaweiTelnet(**AccessControllers.AC6005)
+        connection = ConnectHandler(**AccessControllers.AC6005)
         command = 'display station all'
-        output = connection.send_command(command,
-                                         read_timeout=60)
+        output = connection.send_command(command)
 
         WorldItem.lista_stations = limpar_output(
             output,
@@ -94,3 +93,37 @@ class fluxoHuawei:
         connection.disconnect()
 
         return WorldItem.lista_stations
+
+    @staticmethod
+    def get_users_stations():
+
+        connection = ConnectHandler(**AccessControllers.AC6005,
+                                    conn_timeout=30)
+
+        command = 'display access-user'
+        output = connection.send_command(command)
+
+        WorldItem.list_users = limpar_output(
+            output,
+            WorldItem.regx_userid
+        )
+
+        WorldItem.list_users = separar_campos(
+            WorldItem.list_users
+        )
+
+        command = 'display station all'
+        output = connection.send_command(command)
+
+        WorldItem.list_stations = limpar_output(
+            output,
+            WorldItem.regx_mac
+        )
+
+        WorldItem.list_stations = separar_campos(
+            WorldItem.list_stations
+        )
+
+        connection.disconnect()
+
+        return (WorldItem.list_users, WorldItem.list_stations)
