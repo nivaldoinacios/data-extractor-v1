@@ -22,7 +22,7 @@
 # # #%%
 # # import pandas as pd
 # #
-# # from pkg_resources import WorldItem
+# # from pkg_rsrcs import WorldItem
 # #
 # # df_stations = pd.DataFrame(WorldItem.lista_stations, columns=['MAC', 'AP_ID', 'AP_NAME', 'RF/WLAN', 'BAND', 'Type',
 # #                                                               'RX/TX', 'RSSI', 'VLAN', 'IPADDRESS', 'SSID',
