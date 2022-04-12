@@ -1,10 +1,18 @@
 #!/usr/bin/python3
 import pandas as pd
-from pkg_rsrcs import (asyncio, time, os)
+from pkg_rsrcs import (time, csv, os)
+from elasticsearch import Elasticsearch, helpers
 from utils import (gerar_lista_mac, fluxoHuawei, WorldItem)
 
+es = Elasticsearch(
+    ['http://192.168.10.14:9200'],
+    basic_auth=(
+        os.getenv('ELK_USERNAME'),
+        os.getenv('ELK_PASSWORD'))
+)
 
-async def first_step():
+
+def first_step():
     e = 'Step 1'
     print(f'Iniciando {e}: {time.strftime("%H:%M:%S")}')
 
@@ -18,8 +26,7 @@ async def first_step():
     return WorldItem.list_users, WorldItem.list_stations
 
 
-
-async def second_step():
+def second_step():
     e = 'Step 2'
     print(f'Iniciando {e}: {time.strftime("%H:%M:%S")}')
 
@@ -33,7 +40,7 @@ async def second_step():
     return WorldItem.list_mac
 
 
-async def third_step():
+def third_step():
     e = 'Step 3'
     print(f'Iniciando {e}: {time.strftime("%H:%M:%S")}')
 
@@ -62,23 +69,36 @@ async def third_step():
     return WorldItem.df
 
 
-# async def fourth_step():
-#     await asyncio.sleep(0.5)
-#
-#
-# async def fifth_step():
-#     await asyncio.sleep(0.5)
-
-
-async def main():
+def run():
     print(f'Iniciando o fluxo de steps {time.strftime("%H:%M:%S")}')
 
-    await first_step()
-    await second_step()
-    await third_step()
+    first_step()
+    second_step()
+    third_step()
     # await fourth_task
     # await fifth_task
     print(f'Finalizando o fluxo de steps {time.strftime("%H:%M:%S")}')
 
 
-asyncio.run(main())
+def post_data():
+    print(f'Iniciando o post dos dados {time.strftime("%H:%M:%S")}')
+    e = 'Post Data'
+
+    try:
+        with open(os.getenv('dir_users_stations'), 'r') as f:
+            reader = csv.DictReader(f, delimiter=';')
+            helpers.bulk(es, reader, index='fluxo')
+
+            time.sleep(1)
+
+            f.close()
+    except Exception as e:
+        print(f'Erro ao executar o : {e}')
+
+    print(f'Finalizando o post dos dados {time.strftime("%H:%M:%S")}')
+
+
+run()
+
+
+post_data()
