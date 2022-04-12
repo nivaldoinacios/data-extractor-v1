@@ -1,3 +1,6 @@
+import csv
+import threading
+from elasticsearch import Elasticsearch, helpers
 from pkg_resources import asyncio, time, os
 import pandas as pd
 from utils import (
@@ -52,6 +55,18 @@ async def fourth_step():
     return df
 
 
+async def fifth_step():
+    await asyncio.sleep(0.5)
+    es = Elasticsearch(
+        ['http://192.168.10.14:9200'],
+        basic_auth=(os.getenv('ELK_USERNAME'), os.getenv('ELK_PASSWORD'))
+    )
+
+    with open(os.getenv('dir_users_stations'), 'r') as f:
+        reader = csv.DictReader(f, delimiter=';')
+        helpers.bulk(es, reader, index='fluxo')
+
+
 async def steps():
     print(f'Iniciando o fluxo de steps {time.strftime("%H:%M:%S")}')
 
@@ -59,13 +74,27 @@ async def steps():
     second_task = asyncio.create_task(second_step())
     third_task = asyncio.create_task(third_step())
     fourth_task = asyncio.create_task(fourth_step())
+    fifth_task = asyncio.create_task(fifth_step())
     await first_task
     await second_task
     await third_task
     await fourth_task
+    await fifth_task
     print(f'Finalizando o fluxo de steps {time.strftime("%H:%M:%S")}')
 
 
-asyncio.run(steps())
+def set_interval(func, sec):
+    def func_wrapper():
+        set_interval(func, sec)
+        func()
 
-#%%
+    t = threading.Timer(sec, func_wrapper)
+    t.start()
+    return t
+
+
+def run():
+    asyncio.run(steps())
+
+
+set_interval(run, 120)
