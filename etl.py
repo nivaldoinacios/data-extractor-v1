@@ -12,7 +12,7 @@ def first_step():
     try:
         fluxoHuawei.get_users_stations()
     except Exception as e:
-        print(f'Erro ao executar o Step 1 {e}')
+        print(f'Erro ao executar o {e}')
 
     print(f'Step 1 Concluido: {time.strftime("%H:%M:%S")}')
 
