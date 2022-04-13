@@ -109,6 +109,7 @@ class fluxoHuawei:
 
         connection = ConnectHandler(**AccessControllers.AC6005,
                                     conn_timeout=30)
+        connection.enable()
 
         command = 'display access-user'
         output = connection.send_command(command)
