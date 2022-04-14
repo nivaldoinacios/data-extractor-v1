@@ -62,17 +62,6 @@ def third_step():
     return WorldItem.df
 
 
-def run_etl():
-    print(f'Iniciando processo ETL {time.strftime("%H:%M:%S")}')
-
-    first_step()
-    second_step()
-    third_step()
-    # await fourth_task
-    # await fifth_task
-    print(f'Finalizando o fluxo de steps {time.strftime("%H:%M:%S")}')
-
-
 def post_data():
     print(f'Iniciando o post dos dados {time.strftime("%H:%M:%S")}')
     e = 'Post Data'
@@ -89,6 +78,21 @@ def post_data():
         print(f'Erro ao executar o : {e}')
 
     print(f'{e} Concluido: {time.strftime("%H:%M:%S")}')
+
+
+def run_etl():
+    print(f'Iniciando processo ETL {time.strftime("%H:%M:%S")}')
+
+    first_step()
+
+    time.sleep(0.5)
+    second_step()
+
+    time.sleep(0.5)
+    third_step()
+
+    time.sleep(0.5)
+    print(f'Finalizando o fluxo de steps {time.strftime("%H:%M:%S")}')
 
 
 run_etl()
