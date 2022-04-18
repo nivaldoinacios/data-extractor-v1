@@ -77,7 +77,7 @@ def post_data():
     except Exception as e:
         print(f'Erro ao executar o : {e}')
 
-    print(f'{e} Concluido: {time.strftime("%H:%M:%S")}')
+    print(f'post dos dados concluido: {time.strftime("%H:%M:%S")}')
 
 
 def run_etl():
@@ -98,3 +98,5 @@ def run_etl():
 run_etl()
 
 post_data()
+
+#%%
