@@ -43,7 +43,7 @@ for mac in lista_mac:
     # print(command + mac)
     output = connection.send_command(command + mac)
     output = output.replace(output[0:78], mac, 1)
-    output = output.replace('------------------------------------------------------------------------------', '', 1)
+    output = output.replace("""------------------------------------------------------------------------------""", '', 1)
     output = output.split('\n')
     stations_statistics.append(output)
     # output = output.split('\n')
