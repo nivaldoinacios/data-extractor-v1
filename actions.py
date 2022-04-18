@@ -45,7 +45,6 @@ for mac in lista_mac:
     output = output.replace(output[0:78], mac, 1)
     output = output.replace('------------------------------------------------------------------------------', '', 1)
     output = output.split('\n')
-    output = output.pop()
     stations_statistics.append(output)
     # output = output.split('\n')
     # output = output.split('------------------------------------------------------------------------------')
