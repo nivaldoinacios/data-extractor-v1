@@ -88,38 +88,38 @@ class fluxoHuawei:
     #     command = 'display access-user'
     #     output = connection.send_command(command)
     #
-    #     WorldItem.lista_users = limpar_output(
+    #     WorldItem.list_users = limpar_output(
     #         output,
     #         WorldItem.regx_userid
     #     )
     #
-    #     WorldItem.lista_users = separar_campos(
-    #         WorldItem.lista_users
+    #     WorldItem.list_users = separar_campos(
+    #         WorldItem.list_users
     #     )
     #
     #     connection.disconnect()
     #
-    #     return WorldItem.lista_users
+    #     return WorldItem.list_users
 
-    # @staticmethod
-    # def display_station_all():
-    #
-    #     connection = ConnectHandler(**AccessControllers.AC6005)
-    #     command = 'display station all'
-    #     output = connection.send_command(command)
-    #
-    #     WorldItem.lista_stations = limpar_output(
-    #         output,
-    #         WorldItem.regx_mac
-    #     )
-    #
-    #     WorldItem.lista_stations = separar_campos(
-    #         WorldItem.lista_stations
-    #     )
-    #
-    #     connection.disconnect()
-    #
-    #     return WorldItem.lista_stations
+    @staticmethod
+    def display_station_all():
+
+        connection = ConnectHandler(**AccessControllers.AC6005)
+        command = 'display station all'
+        output = connection.send_command(command)
+
+        WorldItem.list_stations = limpar_output(
+            output,
+            WorldItem.regx_mac
+        )
+
+        WorldItem.list_stations = separar_campos(
+            WorldItem.list_stations
+        )
+
+        connection.disconnect()
+
+        return WorldItem.list_stations
 
     @staticmethod
     def get_users_stations():
