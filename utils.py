@@ -158,3 +158,34 @@ class fluxoHuawei:
         connection.disconnect()
 
         return WorldItem.list_users, WorldItem.list_stations
+
+
+def temporary_fuction(mac_list):
+
+    connection = ConnectHandler(**AccessControllers.AC6005,
+                                conn_timeout=60)
+    connection.enable()
+
+    command = 'display station statistics sta-mac '
+
+    for mac in mac_list:
+
+        output = connection.send_command(command + mac)
+        output = output.replace(output[0:78], mac, 1)
+        output = output.replace(output[-80:], '', 1)
+        output = output.replace('Packets sent to the station', '')
+        output = output.replace('Packets received from the station', '')
+        output = output.replace('Bytes sent to the station', '')
+        output = output.replace('Bytes received from the station', '')
+        output = output.replace('Wireless data rate sent to the station(kbps)', '')
+        output = output.replace('Wireless data rate received from the station(kbps)', '')
+        output = output.replace('Trigger roam total', '')
+        output = output.replace('Trigger roam failed', '')
+        output = output.replace('STA power save percent', '')
+        output = output.replace(':', '')
+        output = output.replace(' ', '')
+        output = output.split('\n')
+
+        WorldItem.list_statistics.append(output)
+
+    connection.disconnect()

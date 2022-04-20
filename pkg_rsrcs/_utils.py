@@ -23,6 +23,7 @@ class WorldItem:
     list_stations = []
     list_users = []
     list_mac = []
+    list_statistics = []
 
     df = None
 

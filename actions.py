@@ -2,7 +2,7 @@ import re
 import os
 from dotenv import load_dotenv
 from netmiko import ConnectHandler
-from utils import gerar_lista_mac, fluxoHuawei, WorldItem
+from etl import WorldItem
 
 fluxoHuawei.display_station_all()
 
@@ -34,16 +34,17 @@ for mac in lista_mac:
 
     output = output.replace(output[0:78], mac, 1)
     output = output.replace(output[-80:], '', 1)
+    output = output.replace('Packets sent to the station', '')
+    output = output.replace('Packets received from the station', '')
+    output = output.replace('Bytes sent to the station', '')
+    output = output.replace('Bytes received from the station', '')
+    output = output.replace('Wireless data rate sent to the station(kbps)', '')
+    output = output.replace('Wireless data rate received from the station(kbps)', '')
+    output = output.replace('Trigger roam total', '')
+    output = output.replace('Trigger roam failed', '')
+    output = output.replace('STA power save percent', '')
+    output = output.replace(':', '')
     output = output.replace(' ', '')
-    output = output.replace('Packetssenttothestation:', '')
-    output = output.replace('Packetsreceivedfromthestation:', '')
-    output = output.replace('Bytessenttothestation:', '')
-    output = output.replace('Bytesreceivedfromthestation:', '')
-    output = output.replace('Wirelessdataratesenttothestation(kbps):', '')
-    output = output.replace('Wirelessdataratereceivedfromthestation(kbps):', '')
-    output = output.replace('Triggerroamtotal:', '')
-    output = output.replace('Triggerroamfailed:', '')
-    output = output.replace('STApowersavepercent:', '')
     output = output.split('\n')
 
     stations_statistics.append(output)
