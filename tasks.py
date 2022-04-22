@@ -3,6 +3,7 @@ from elasticsearch import Elasticsearch, helpers
 from pkg_rsrcs import csv, os
 from utils import *
 import pandas as pd
+import eland as ed
 
 connection = ConnectHandler(**AccessControllers.AC6005,
                             conn_timeout=60)
@@ -63,18 +64,22 @@ for mac in WorldItem.lista_mac:
 connection.disconnect()
 
 # %%
-df_access_users = pd.DataFrame(WorldItem.lista_users, columns=["UserID", "Username", "IPADDRESS", "MAC",
-                                                               "Status", "@timestamp-py"])
+df_access_users = pd.DataFrame(WorldItem.lista_users,
+                               columns=["UserID", "Username", "IPADDRESS", "MAC",
+                                        "Status", "@timestamp-py"]
+                               )
 
 df_stations_all = pd.DataFrame(WorldItem.lista_stations,
                                columns=['MAC', 'AP_ID', 'AP_NAME', 'RF/WLAN', 'BAND', 'Type',
                                         'RX/TX', 'RSSI', 'VLAN', 'IPADDRESS', 'SSID',
-                                        "@timestamp-py"])
+                                        "@timestamp-py"]
+                               )
 
 df_statistics = pd.DataFrame(WorldItem.lista_statistics,
                              columns=["MAC", "PCKT_SENT", "PCKT_RECEIVED", "BYTES_SENT",
                                       "BYTES_RECEIVED", "WID_RATE_SENT", "WID_RATE_RECEIVED",
-                                      "TRIGGER_R_TOTAL", "TRIGGER_R_FAILED", "STA_POWER_SAVE"])
+                                      "TRIGGER_R_TOTAL", "TRIGGER_R_FAILED", "STA_POWER_SAVE"]
+                             )
 
 WorldItem.df = pd.merge(df_access_users, df_stations_all, how='outer', on=['MAC'])
 
@@ -85,12 +90,54 @@ WorldItem.df = WorldItem.df.rename(columns={'IPADDRESS_x': 'IPADDRESS'})
 WorldItem.df = pd.merge(WorldItem.df, df_statistics, how='outer', on=['MAC'])
 WorldItem.df = WorldItem.df.fillna(0)
 
-WorldItem.df.to_csv(path_or_buf=os.getenv('dados'), sep=';',
-                    columns=['UserID', 'Username', 'IPADDRESS', 'MAC', 'Status', 'AP_ID',
-                             'AP_NAME', 'RF/WLAN', 'BAND', 'Type', 'RX/TX', 'RSSI', 'VLAN',
-                             'SSID', '@timestamp-py', "PCKT_SENT", "PCKT_RECEIVED", "BYTES_SENT",
-                             "BYTES_RECEIVED", "WID_RATE_SENT", "WID_RATE_RECEIVED",
-                             "TRIGGER_R_TOTAL", "TRIGGER_R_FAILED", "STA_POWER_SAVE"],
-                    header=True, index=True, index_label='index', line_terminator='\n')
+WorldItem.df.to_csv(
+    path_or_buf=os.getenv('dados'),
+    sep=';',
+    columns=['UserID', 'Username', 'IPADDRESS', 'MAC', 'Status', 'AP_ID',
+             'AP_NAME', 'RF/WLAN', 'BAND', 'Type', 'RX/TX', 'RSSI', 'VLAN',
+             'SSID', '@timestamp-py', "PCKT_SENT", "PCKT_RECEIVED", "BYTES_SENT",
+             "BYTES_RECEIVED", "WID_RATE_SENT", "WID_RATE_RECEIVED",
+             "TRIGGER_R_TOTAL", "TRIGGER_R_FAILED", "STA_POWER_SAVE"],
+    header=True,
+    index=True,
+    index_label='index',
+    line_terminator='\n'
+)
+
+# %%
+es = Elasticsearch(
+    ['http://192.168.10.14:9200'],
+    basic_auth=(os.getenv('ELK_USERNAME'), os.getenv('ELK_PASSWORD'))
+)
+# %%
+# """ Mapping do DataFrame para o ElasticSearch """
+
+# df_ed = ed.pandas_to_eland(
+#     pd_df=WorldItem.df,
+#     es_client=es,
+#     es_dest_index='eland-fluxo',
+#     es_type_overrides={
+#         'Username': 'text',
+#         'MAC': 'text',
+#         'SSID': 'text',
+#         'AP_NAME': 'text',
+#         "@timestamp-py": "date"
+#     },
+#     es_if_exists='replace',
+#     es_refresh=True,
+# )
+
+# %%
+e = 'post dos dados'
+try:
+    with open(os.getenv('dados'), 'r') as f:
+        reader = csv.DictReader(f, delimiter=';')
+        helpers.bulk(WorldItem.es, reader, index='eland-fluxo')
+
+        time.sleep(1)
+
+        f.close()
+except Exception as e:
+    print(f'Erro ao executar o : {e}')
 
 #%%
