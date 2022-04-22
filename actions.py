@@ -1,29 +1,46 @@
-from etl import *
+from utils import *
+import os
 
-fluxoHuawei.display_station_all()
-
-lista_mac = gerar_lista_mac(WorldItem.lista_stations)
-
-dispositivo = {
-    'device_type': 'huawei',
-    'host': '172.17.1.150',
-    'username': os.getenv('USUARIO'),
-    'password': os.getenv('PASSWORD'),
-    'global_delay_factor': 0.1,
-}
-
-connection = ConnectHandler(**dispositivo)
+connection = ConnectHandler(**AccessControllers.AC6005,
+                            conn_timeout=60)
 connection.enable()
+
+command = 'display access-user'
+output = connection.send_command(command,
+                                 read_timeout=30)
+
+WorldItem.lista_users = limpar_output(
+    output,
+    WorldItem.regx_userid
+)
+
+WorldItem.lista_users = separar_campos(
+    WorldItem.lista_users
+)
+
+time.sleep(1)
+
+command = 'display station all'
+output = connection.send_command(command)
+
+WorldItem.lista_stations = limpar_output(
+    output,
+    WorldItem.regx_mac
+)
+
+WorldItem.lista_stations = separar_campos(
+    WorldItem.lista_stations
+)
+
 
 command = 'display station statistics sta-mac '
 
-stations_statistics = []
+WorldItem.lista_mac = gerar_lista_mac(
+    WorldItem.lista_stations
+)
 
-for mac in lista_mac:
-    # criar função para output
-
+for mac in WorldItem.lista_mac:
     output = connection.send_command(command + mac)
-
     output = output.replace(output[0:78], mac, 1)
     output = output.replace(output[-80:], '', 1)
     output = output.replace('Packets sent to the station', '')
@@ -39,10 +56,9 @@ for mac in lista_mac:
     output = output.replace(' ', '')
     output = output.split('\n')
 
-    stations_statistics.append(output)
+    WorldItem.lista_statistics.append(output)
 
-    print(stations_statistics)
 
 connection.disconnect()
 
-# %%
+#%%
