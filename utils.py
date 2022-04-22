@@ -108,18 +108,18 @@ class fluxoHuawei:
         command = 'display station all'
         output = connection.send_command(command)
 
-        WorldItem.list_stations = limpar_output(
+        WorldItem.lista_stations = limpar_output(
             output,
             WorldItem.regx_mac
         )
 
-        WorldItem.list_stations = separar_campos(
-            WorldItem.list_stations
+        WorldItem.lista_stations = separar_campos(
+            WorldItem.lista_stations
         )
 
         connection.disconnect()
 
-        return WorldItem.list_stations
+        return WorldItem.lista_stations
 
     @staticmethod
     def get_users_stations():
@@ -132,13 +132,13 @@ class fluxoHuawei:
         output = connection.send_command(command,
                                          read_timeout=30)
 
-        WorldItem.list_users = limpar_output(
+        WorldItem.lista_users = limpar_output(
             output,
             WorldItem.regx_userid
         )
 
-        WorldItem.list_users = separar_campos(
-            WorldItem.list_users
+        WorldItem.lista_users = separar_campos(
+            WorldItem.lista_users
         )
 
         time.sleep(1)
@@ -146,46 +146,15 @@ class fluxoHuawei:
         command = 'display station all'
         output = connection.send_command(command)
 
-        WorldItem.list_stations = limpar_output(
+        WorldItem.lista_stations = limpar_output(
             output,
             WorldItem.regx_mac
         )
 
-        WorldItem.list_stations = separar_campos(
-            WorldItem.list_stations
+        WorldItem.lista_stations = separar_campos(
+            WorldItem.lista_stations
         )
 
         connection.disconnect()
 
-        return WorldItem.list_users, WorldItem.list_stations
-
-
-def temporary_fuction(mac_list):
-
-    connection = ConnectHandler(**AccessControllers.AC6005,
-                                conn_timeout=60)
-    connection.enable()
-
-    command = 'display station statistics sta-mac '
-
-    for mac in mac_list:
-
-        output = connection.send_command(command + mac)
-        output = output.replace(output[0:78], mac, 1)
-        output = output.replace(output[-80:], '', 1)
-        output = output.replace('Packets sent to the station', '')
-        output = output.replace('Packets received from the station', '')
-        output = output.replace('Bytes sent to the station', '')
-        output = output.replace('Bytes received from the station', '')
-        output = output.replace('Wireless data rate sent to the station(kbps)', '')
-        output = output.replace('Wireless data rate received from the station(kbps)', '')
-        output = output.replace('Trigger roam total', '')
-        output = output.replace('Trigger roam failed', '')
-        output = output.replace('STA power save percent', '')
-        output = output.replace(':', '')
-        output = output.replace(' ', '')
-        output = output.split('\n')
-
-        WorldItem.list_statistics.append(output)
-
-    connection.disconnect()
+        return WorldItem.lista_users, WorldItem.lista_stations

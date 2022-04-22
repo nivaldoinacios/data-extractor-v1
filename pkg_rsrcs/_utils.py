@@ -20,10 +20,10 @@ class WorldItem:
     regx_mac = '^([0-9A-Fa-f]{4}[:-])'
     regx_userid = '^\s([\d]{1,4})'
 
-    list_stations = []
-    list_users = []
-    list_mac = []
-    list_statistics = []
+    lista_stations = []
+    lista_users = []
+    lista_mac = []
+    lista_statistics = []
 
     df = None
 

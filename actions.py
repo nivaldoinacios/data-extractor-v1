@@ -1,14 +1,8 @@
-import re
-import os
-from dotenv import load_dotenv
-from netmiko import ConnectHandler
-from etl import WorldItem
+from etl import *
 
 fluxoHuawei.display_station_all()
 
-lista_mac = gerar_lista_mac(WorldItem.list_stations)
-
-load_dotenv()
+lista_mac = gerar_lista_mac(WorldItem.lista_stations)
 
 dispositivo = {
     'device_type': 'huawei',
@@ -23,12 +17,10 @@ connection.enable()
 
 command = 'display station statistics sta-mac '
 
-
 stations_statistics = []
 
 for mac in lista_mac:
-
-# criar função para output
+    # criar função para output
 
     output = connection.send_command(command + mac)
 

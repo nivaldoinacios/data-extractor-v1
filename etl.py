@@ -16,33 +16,33 @@ def first_step():
 
     print(f'Step 1 Concluido: {time.strftime("%H:%M:%S")}')
 
-    return WorldItem.list_users, WorldItem.list_stations
+    return WorldItem.lista_users, WorldItem.lista_stations
 
 
 def second_step():
     e = 'Step 2'
     print(f'Iniciando {e}: {time.strftime("%H:%M:%S")}')
 
-    gerar_lista_mac(WorldItem.list_stations)
-    WorldItem.list_mac = gerar_lista_mac(
-        WorldItem.list_stations
+    gerar_lista_mac(WorldItem.lista_stations)
+    WorldItem.lista_mac = gerar_lista_mac(
+        WorldItem.lista_stations
     )
 
     print(f'{e} Concluido: {time.strftime("%H:%M:%S")}')
 
-    return WorldItem.list_mac
+    return WorldItem.lista_mac
 
 
 def third_step():
     e = 'Step 3'
     print(f'Iniciando {e}: {time.strftime("%H:%M:%S")}')
 
-    df_stations_all = pd.DataFrame(WorldItem.list_stations,
+    df_stations_all = pd.DataFrame(WorldItem.lista_stations,
                                    columns=['MAC', 'AP_ID', 'AP_NAME', 'RF/WLAN', 'BAND', 'Type',
                                             'RX/TX', 'RSSI', 'VLAN', 'IPADDRESS', 'SSID',
                                             "@timestamp-py"])
 
-    df_access_users = pd.DataFrame(WorldItem.list_users, columns=["UserID", "Username", "IPADDRESS", "MAC",
+    df_access_users = pd.DataFrame(WorldItem.lista_users, columns=["UserID", "Username", "IPADDRESS", "MAC",
                                                                   "Status", "@timestamp-py"])
 
     WorldItem.df = pd.merge(df_access_users, df_stations_all, how='outer', on=['MAC'])
