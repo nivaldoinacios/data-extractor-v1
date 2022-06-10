@@ -1,14 +1,29 @@
-from netmiko import ConnectHandler
-from pkg_rsrcs import (
-    AccessControllers,
-    WorldItem,
-    threading,
-    time,
-    re,
-)
+import time
+import re
 
 
-def limpar_output(output, regx):
+global timestamp
+global Lista
+global Regx
+
+
+timestamp = time.strftime("""%Y-%m-%dT%H:%M:%S%z""")
+
+
+class Regx:
+    mac = '^([0-9A-Fa-f]{4}[:-])'
+    userid = '^\s([\d]{1,4})'
+
+
+class Lista:
+
+    stations = []
+    users = []
+    mac = []
+    statistics = []
+
+
+def limpar_output_tabela(output, regx):
     output = output.split('\n')
     result = []
 
@@ -17,12 +32,12 @@ def limpar_output(output, regx):
         if re.search(regx, str(line)) is None:
             pass
         else:
-            result.append(line + ' ' + WorldItem.timestamp + '\n')
+            result.append(line + ' ' + timestamp + '\n')
 
     return result
 
 
-def separar_campos(lista):
+def separar_campos_tabela(lista):
     result = []
 
     for line in lista:
@@ -37,6 +52,8 @@ def separar_campos(lista):
     return result
 
 
+# gera uma lista mac se a primeira coluna do output
+# (modelo tabela) for de endereços MAC.
 def gerar_lista_mac(lista):
     result = []
 
@@ -44,97 +61,3 @@ def gerar_lista_mac(lista):
         result.append(line[0])
 
     return result
-
-
-def set_interval(func, sec):
-    def func_wrapper():
-        set_interval(func, sec)
-        func
-    t = threading.Timer(sec, func_wrapper)
-    t.start()
-    return t
-
-
-# rever o nome do dispositivo e forma de conexao -> 'issue_1'
-# criar um metodo para criar um objeto de conexao com o dispositivo
-
-
-class fluxoHuawei:
-    # issue_1
-    def __init__(self):
-        pass
-
-    @staticmethod
-    def display_access_users():
-
-        connection = ConnectHandler(**AccessControllers.AC6005)
-        command = 'display access-user'
-        output = connection.send_command(command)
-
-        WorldItem.lista_users = limpar_output(
-            output,
-            WorldItem.regx_userid
-        )
-
-        WorldItem.lista_users = separar_campos(
-            WorldItem.lista_users
-        )
-
-        connection.disconnect()
-
-        return WorldItem.lista_users
-
-    @staticmethod
-    def display_station_all():
-
-        connection = ConnectHandler(**AccessControllers.AC6005)
-        command = 'display station all'
-        output = connection.send_command(command)
-
-        WorldItem.lista_stations = limpar_output(
-            output,
-            WorldItem.regx_mac
-        )
-
-        WorldItem.lista_stations = separar_campos(
-            WorldItem.lista_stations
-        )
-
-        connection.disconnect()
-
-        return WorldItem.lista_stations
-
-    @staticmethod
-    def get_users_stations():
-
-        connection = ConnectHandler(**AccessControllers.AC6005,
-                                    conn_timeout=30)
-        connection.enable()
-
-        command = 'display access-user'
-        output = connection.send_command(command)
-
-        WorldItem.list_users = limpar_output(
-            output,
-            WorldItem.regx_userid
-        )
-
-        WorldItem.list_users = separar_campos(
-            WorldItem.list_users
-        )
-
-        command = 'display station all'
-        output = connection.send_command(command)
-
-        WorldItem.list_stations = limpar_output(
-            output,
-            WorldItem.regx_mac
-        )
-
-        WorldItem.list_stations = separar_campos(
-            WorldItem.list_stations
-        )
-
-        connection.disconnect()
-
-        return (WorldItem.list_users, WorldItem.list_stations)

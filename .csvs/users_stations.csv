@@ -1,8 +1,0 @@
-index;UserID;Username;IPADDRESS;MAC;Status;AP_ID;AP_NAME;RF/WLAN;BAND;Type;RX/TX;RSSI;VLAN;SSID;@timestamp-py
-0;4;netmiko;10.81.234.6;-;Success;0;0;0;0;0;0;0;0;0;0
-1;6;netmiko;192.168.10.13;-;Success;0;0;0;0;0;0;0;0;0;0
-2;8;netmiko;192.168.10.13;-;Success;0;0;0;0;0;0;0;0;0;0
-3;16;netmiko;192.168.10.13;-;Success;0;0;0;0;0;0;0;0;0;0
-4;4295;rogerio.gomes;172.19.13.52;389a-f679-e1bd;Success;7;AP_CWB_ESTOQUE_2;0/1;2.4G;11n;58/58;-48;13;eterea;2022-04-12T19:48:27-0300
-5;4480;joao.feitosa;172.16.13.68;7ce9-d3d6-5b31;Success;5;AP_CWB_ENTRADA;0/1;2.4G;11n;65/58;-56;13;eterea;2022-04-12T19:48:27-0300
-6;6041;9cb70d9f7570;10.10.17.102;9cb7-0d9f-7570;Pre-authen;2;AP_BSB_COMERCIAL;0/4;2.4G;11n;64/58;-49;400;61_Roost_Omnidata;2022-04-12T19:48:27-0300
