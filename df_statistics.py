@@ -2,12 +2,15 @@ from elasticsearch import Elasticsearch
 from df_base import df
 from etl import Lista
 import pandas as pd_df
+from dotenv import load_dotenv
 import eland as ed
 import os
 
+load_dotenv()
+
 es = Elasticsearch(
     ['http://192.168.10.14:9200'],
-    basic_auth=('nivaldo', '#Roost2021!')
+    basic_auth=(os.getenv('ELK_USERNAME'), os.getenv('ELK_PASSWORD'))
 )
 
 pd_df = df[["MAC", "AP_NAME", "BYTES_SENT", "BYTES_RECEIVED"]]
