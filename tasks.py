@@ -1,7 +1,7 @@
-from dotenv import load_dotenv
-from utils import *
-import pandas as pd
-import os
+# from dotenv import load_dotenv
+# from utils import *
+# import pandas as pd
+# import os
 #
 # load_dotenv()
 #
@@ -44,3 +44,8 @@ import os
 #     index_label='index',
 #     line_terminator='\n'
 # )
+# pd = pd.DataFrame(Lista.statistics,
+#                              columns=["MAC", "PCKT_SENT", "PCKT_RECEIVED", "BYTES_SENT",
+#                                       "BYTES_RECEIVED", "WID_RATE_SENT", "WID_RATE_RECEIVED",
+#                                       "TRIGGER_R_TOTAL", "TRIGGER_R_FAILED", "STA_POWER_SAVE"]
+#                              )
